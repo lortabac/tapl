@@ -44,9 +44,10 @@ eval1(iszero(succ(NV1)), false) :-
 eval1(iszero(T1), iszero(T1_)) :-
     eval1(T1, T1_).
 
-% Call eval1 if a rule applies
+% Call eval1 as long as it can be reduced
 eval(T, T_) :-
-    eval1(T, T_),
+    eval1(T, T1),
+    eval(T1, T_),
     !.
 
 % Return the term if no rule applies

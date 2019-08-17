@@ -5,8 +5,11 @@
 test(if) :-
     eval(if(true, true, if(false, false, false)), true).
 
-test(pred) :-
+test(pred1) :-
     eval(pred(succ(0)), 0).
+
+test(pred2) :-
+    eval(pred(pred(succ(succ(0)))), 0).
 
 test(iszero) :-
     eval(iszero(succ(0)), false).
