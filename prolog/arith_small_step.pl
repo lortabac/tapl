@@ -1,45 +1,53 @@
 % Chapter 3 - Untyped Arithmetic Expressions
-% Small-step evaluation
-:- module(arith_small_step, [eval/2]).
+% Small-step eval1uation
+:- module(arith_small_step, [eval1/2]).
 
 % Numeric values
 nv(0) :- !.
 nv(succ(N)) :- nv(N).
 
 % E-IfTrue
-eval(if(true, T2, _T3), T2) :- !.
+eval1(if(true, T2, _T3), T2) :- !.
 
 % E-IfFalse
-eval(if(false, _T2, T3), T3) :- !.
+eval1(if(false, _T2, T3), T3) :- !.
 
 % E-If
-eval(if(T1, T2, T3), if(T1_, T2, T3)) :-
-    eval(T1, T1_).
+eval1(if(T1, T2, T3), if(T1_, T2, T3)) :-
+    eval1(T1, T1_).
 
 % E-Succ
-eval(succ(T1), succ(T1_)) :-
-    eval(T1, T1_).
+eval1(succ(T1), succ(T1_)) :-
+    eval1(T1, T1_).
 
 % E-PredZero
-eval(pred(0), 0) :- !.
+eval1(pred(0), 0) :- !.
 
 % E-PredSucc
-eval(pred(succ(NV1)), NV1) :-
+eval1(pred(succ(NV1)), NV1) :-
     nv(NV1),
     !.
 
 % E-Pred
-eval(pred(T1), pred(T1_)) :-
-    eval(T1, T1_).
+eval1(pred(T1), pred(T1_)) :-
+    eval1(T1, T1_).
 
 % E-IsZeroZero
-eval(iszero(0), true) :- !.
+eval1(iszero(0), true) :- !.
 
 % E-IsZeroSucc
-eval(iszero(succ(NV1)), false) :-
+eval1(iszero(succ(NV1)), false) :-
     nv(NV1),
     !.
 
 % E-IsZero
-eval(iszero(T1), iszero(T1_)) :-
-    eval(T1, T1_).
+eval1(iszero(T1), iszero(T1_)) :-
+    eval1(T1, T1_).
+
+% Call eval1 if a rule applies
+eval(T, T_) :-
+    eval1(T, T_),
+    !.
+
+% Return the term if no rule applies
+eval(T, T) :- !.
