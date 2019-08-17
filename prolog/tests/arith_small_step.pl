@@ -11,14 +11,8 @@ test(pred) :-
 test(iszero) :-
     eval(iszero(succ(0)), false).
 
-test(value1) :-
-    eval(true, true).
-
-test(value2) :-
-    eval(succ(0), succ(0)).
-
 test(stuck1) :-
-    eval(pred(true), pred(true)).
+    \+ eval(pred(true), _).
 
 test(stuck2) :-
-    eval(iszero(false), iszero(false)).
+    \+ eval(iszero(false), _).
