@@ -6,6 +6,14 @@
 nv(0) :- !.
 nv(succ(N)) :- nv(N).
 
+% Values
+v(true) :- !.
+v(false) :- !.
+v(T) :- nv(T), !.
+
+% Normal form
+eval(T, T) :- v(T), !.
+
 % E-IfTrue
 eval(if(true, T2, _T3), T2) :- !.
 
