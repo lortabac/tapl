@@ -1,6 +1,6 @@
 % Chapter 3 - Untyped Arithmetic Expressions
-% Small-step eval1uation
-:- module(arith_small_step, [eval1/2]).
+% Small-step evaluation
+:- module(arith_small_step, [eval/2]).
 
 % Numeric values
 nv(0) :- !.

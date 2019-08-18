@@ -1,6 +1,6 @@
 % Chapter 3 - Untyped Arithmetic Expressions
-% Big-step beval1uation
-:- module(arith_big_step, [beval1/2]).
+% Big-step evaluation
+:- module(arith_big_step, [beval/2]).
 
 % Numeric values
 nv(0) :- !.
